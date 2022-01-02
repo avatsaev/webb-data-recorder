@@ -1,0 +1,11 @@
+
+services:
+  webb-data-recorder:
+    container_name: "webb-data-recorder"
+    image: "avatsaev/webb-data-recorder:latest"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+
