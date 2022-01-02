@@ -12,8 +12,9 @@ const influxClient = new InfluxDB({url: INFLUXDB_HOST, token: INFLUXDB_TOKEN})
 const writeApi = influxClient.getWriteApi(INFLUXDB_ORG, INFLUXDB_BUCKET);
 
 let dataPointsCounter = 0;
-
+console.log("Starting recording with interval: " + SAMPLE_INTERVAL + "ms");
 const interval = setInterval(async () => {
+
     axios.get(`${WEBB_TRACKER_API_ENDPOINT}/track`)
         .then( res => {
             const data: TrackingPayload = res.data;
