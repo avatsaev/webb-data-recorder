@@ -20,12 +20,10 @@ const interval = setInterval(async () => {
             const data: TrackingPayload = res.data;
 
             const tempPoints = Object.entries(data.tempC).map( ([k,v]) =>  new Point('webbTemp').floatField(k, v));
-            const speedPoint = new Point('webbSpeed').floatField('speedKms', data.speedKmS);
-            const distanceL2Point = new Point('webbDistance').floatField('distanceL2Km', data.distanceL2Km);
-            const distanceEarthPoint = new Point('webbDistance').floatField('distanceEarthKm', data.distanceEarthKm);
 
-            console.log(`Writing ${tempPoints[0].toLineProtocol()}`);
-            writeApi.writePoints([...tempPoints, speedPoint, distanceL2Point, distanceEarthPoint]);
+
+            console.log(`Writing `, tempPoints);
+            writeApi.writePoints(tempPoints);
             dataPointsCounter++;
 
             // write time series data in batches of 10 points
